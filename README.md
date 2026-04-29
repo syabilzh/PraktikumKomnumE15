@@ -9,3 +9,7 @@
 | 5025251212 | Joel Angga Fransmartua Manalu |
 | 5025251209 | Marvel Timothy Noya  |
 | 5025251217 | Syabil Zihni                    |
+
+### Daftar Soal
+- [Praktikum 1 - PPT2](/praktikum-ppt02)
+- 
