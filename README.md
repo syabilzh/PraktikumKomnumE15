@@ -10,6 +10,6 @@
 | 5025251209 | Marvel Timothy Noya  |
 | 5025251217 | Syabil Zihni                    |
 
-### Daftar Soal
+### Daftar Praktikum
 - [Praktikum 1 - PPT2](/praktikum-ppt02)
 - 
