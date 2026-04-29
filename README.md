@@ -11,4 +11,4 @@
 | 5025251217 | Syabil Zihni                    |
 
 ### Daftar Praktikum
-- [Praktikum 1 - PPT2](/praktikum-ppt02)
+- [Praktikum 1 - PPT2](/Praktikum_1/)
