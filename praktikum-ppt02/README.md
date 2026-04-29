@@ -1,6 +1,6 @@
-# Laporan Praktikum 1 - PPT 2
+# Laporan Praktikum 1
 
-## Program Algoritma Pemrosesan dengan Metode Regula Falsi
+## Program Algoritma Pemrosesan dengan Metode Regula Falsi (PPT 2)
 
 ### Langkah-Langkah
 Pada praktikum ini, diminta untuk membuat suatu mengimplementasikan metode Regula Falsi menjadi suatu program yang dapat menampilkan proses iteratif numerik secara lengkap bersama dengan grafik fungsinya.
