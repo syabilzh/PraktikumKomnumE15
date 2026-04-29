@@ -7,7 +7,7 @@ Pada praktikum ini, diminta untuk membuat suatu mengimplementasikan metode Regul
 
 Kami memutuskan untuk menggunakan bahasa pemrograman `C++` dengan bantuan `gnuplot` untuk output grafiknya.
 
-Pertama-tama, inisialisasi fungsi sesuai kebutuhan. Sebagai contoh, disini kami menggunakan fungsi $f(x) = e^(-x) - x$ yang terdapat di contoh soal PPT.
+Pertama-tama, inisialisasi fungsi sesuai kebutuhan. Sebagai contoh, disini kami menggunakan fungsi $f(x) = e^{-x} - x$ yang terdapat di contoh soal PPT.
 ```C++
 // ubah fungsi sesuai kebutuhan
 double func(double x) {
@@ -15,7 +15,7 @@ double func(double x) {
 }
 ```
 
-Selanjutnya, buat fungsi `regulaFalsi` menggunakan rumus iteratif $x2 = x1 - (f(x2)-(x2-x1))/(f(x2)-f(x1))$ . Fungsi ini berjalan berkali-kali selama $x2$ masih memenuhi syarat toleransi.
+Selanjutnya, buat fungsi `regulaFalsi` menggunakan rumus iteratif $x_2 = x_1 - (f(x_2)-(x_2-x_1))/(f(x_2)-f(x_1))$ . Fungsi ini berjalan berkali-kali selama $x_2$ masih memenuhi syarat toleransi.
 ```C++
 double regulaFalsi(double x0, double x1, int digits) 
 {
@@ -58,7 +58,7 @@ void writeDataToFile(double x0, double x1, const char* filename) {
 }
 ```
 
-Pada fungsi `main`, terima input untuk $x0$, $x1$, dan juga batas toleransi yang diinginkan. Kemudian, jalankan `gnuplot` untuk menampilkan grafik.
+Pada fungsi `main`, terima input untuk $x_0$, $x_1$, dan juga batas toleransi yang diinginkan. Kemudian, jalankan `gnuplot` untuk menampilkan grafik.
 ```C++
 int main() 
 {
