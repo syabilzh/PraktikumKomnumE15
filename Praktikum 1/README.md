@@ -295,13 +295,13 @@ int main() {
 
 ### B. Screenshot
 
-<img width="739" height="507" alt="image" src="https://github.com/user-attachments/assets/98ef610a-7b39-4ffb-bcc8-31cf3d9d08c2" />
-|
-<img width="774" height="526" alt="image" src="https://github.com/user-attachments/assets/13626a98-23f6-48ca-842d-f9c72a57bca8" />
-|
-<img width="774" height="475" alt="image" src="https://github.com/user-attachments/assets/4345b974-ba0a-49c8-9470-5ce5915880e3" />
-|
-<img width="754" height="524" alt="image" src="https://github.com/user-attachments/assets/40326199-4549-4c9a-b6a0-4a17ed1649f1" />
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/98ef610a-7b39-4ffb-bcc8-31cf3d9d08c2" />
+&nbsp;
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/13626a98-23f6-48ca-842d-f9c72a57bca8" />
+&nbsp;
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/4345b974-ba0a-49c8-9470-5ce5915880e3" />
+&nbsp;
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/40326199-4549-4c9a-b6a0-4a17ed1649f1" />
 
 
 ### C. Full Code
