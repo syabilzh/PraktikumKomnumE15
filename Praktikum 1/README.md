@@ -244,21 +244,23 @@ void secant(int pilihan, double x0, double x1, double tol, int max_iter) {
 }
 ```
 Mekanisme dalam metode Secant berjalan dengan langkah sebagai berikut:
-    1. Hitung nilai $f(x_0)$ dan $f(x_1)$
-    2. Gunakan rumus Secant untuk mendapatkan x
-    3. Tampilkan hasil iterasi
-    4. Periksa: Jika $|x_2 - x_1| < toleransi$, maka iterasi dihentikan
-​    5. Perbarui nilai: 
-        - $x_0 = x_1$,
-        - $x_1 = x_2$
-    6. Ulangi hingga konvergen atau mencapai batas iterasi
+
+1. Hitung nilai $f(x_0)$ dan $f(x_1)$
+2. Gunakan rumus Secant untuk mendapatkan x
+3. Tampilkan hasil iterasi
+4. Periksa: Jika $|x_2 - x_1| < toleransi$, maka iterasi dihentikan
+5. Perbarui nilai:
+    - $x_0 = x_1$,
+    - $x_1 = x_2$
+6. Ulangi hingga konvergen atau mencapai batas iterasi
     
 
 Lalu pada fungsi `main`, program menerima input dari pengguna berupa:
-    1. Pilihan fungsi
-    2. Nilai awal $x_0$ dan $x_1$
-    3. Nilai toleransi
-    4. Maksimum iterasi
+
+1. Pilihan fungsi
+2. Nilai awal $x_0$ dan $x_1$
+3. Nilai toleransi
+4. Maksimum iterasi
     
 ```C++
 int main() {
