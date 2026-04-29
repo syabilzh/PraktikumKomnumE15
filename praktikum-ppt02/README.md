@@ -1,8 +1,8 @@
 # Laporan Praktikum 1
 
-## Program Algoritma Pemrosesan dengan Metode Regula Falsi (PPT 2)
+## 1. Program Algoritma Pemrosesan dengan Metode Regula Falsi (PPT 2)
 
-### Langkah-Langkah
+### A. Langkah-Langkah
 Pada praktikum ini, diminta untuk membuat suatu mengimplementasikan metode Regula Falsi menjadi suatu program yang dapat menampilkan proses iteratif numerik secara lengkap bersama dengan grafik fungsinya.
 
 Kami memutuskan untuk menggunakan bahasa pemrograman `C++` dengan bantuan `gnuplot` untuk output grafiknya.
@@ -96,10 +96,10 @@ int main()
 }
 ```
 
-### Screenshot
+### B. Screenshot
 <img width="1916" height="1090" alt="image" src="https://github.com/user-attachments/assets/a8cbf868-2bff-4e03-bc17-311e96fb9033" />
 
-### Full Code
+### C. Full Code
 ```C++
 #include <iostream>
 #include <cmath>
