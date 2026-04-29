@@ -12,4 +12,3 @@
 
 ### Daftar Praktikum
 - [Praktikum 1 - PPT2](/praktikum-ppt02)
-- 
