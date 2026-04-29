@@ -244,7 +244,7 @@ void secant(int pilihan, double x0, double x1, double tol, int max_iter) {
 }
 ```
 Mekanisme dalam metode Secant berjalan dengan langkah sebagai berikut:
-    1. Hitung nilai $f(x_0) dan $f(x_1)
+    1. Hitung nilai $f(x_0)$ dan $f(x_1)$
     2. Gunakan rumus Secant untuk mendapatkan x
     3. Tampilkan hasil iterasi
     4. Periksa: Jika $|x_2 - x_1| < toleransi$, maka iterasi dihentikan
