@@ -1,62 +1,73 @@
 #include <iostream>
 #include <cmath>
-#include <iomanip>
+#include <string>
+#include "exprtk.hpp" // open source library untuk parsing dan evaluasi ekspresi matematika
+
 using namespace std;
 
-// Fungsi yang bisa dipilih user
-double f(double x, int pilihan) {
-    switch(pilihan) {
-        case 1: return x*x - 4;              // x^2 - 4
-        case 2: return x*x*x - x - 2;        // x^3 - x - 2
-        case 3: return cos(x) - x;           // cos(x) - x
-        case 4: return exp(x) - 3*x;         // e^x - 3x
-        default: return 0;
+// evaluator fungsi dari string
+double evaluate(string func_str, double x) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+
+    double var_x = x;// variabel x yang akan digunakan dalam ekspresi
+
+    // buat symbol table dan daftarkan variabel serta fungsi yang diperlukan
+    symbol_table_t symbol_table;
+    symbol_table.add_variable("x", var_x);
+    symbol_table.add_constants();
+
+    // buat ekspresi dan daftarkan symbol table
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    // buat parser dan kompilasi ekspresi dari string
+    parser_t parser;
+    if (!parser.compile(func_str, expression)) {
+        throw runtime_error("Fungsi tidak valid!");
     }
+
+    return expression.value();// evaluasi ekspresi dengan nilai x yang diberikan
 }
 
-void secant(int pilihan, double x0, double x1, double tol, int max_iter) {
-    double x2;// Variabel untuk menyimpan hasil iterasi berikutnya
-    
-    cout << fixed << setprecision(6);// Set precision untuk output, agar lebih mudah dibaca, terutama untuk nilai akar yang ditemukan
-    
-    for(int i = 1; i <= max_iter; i++) {// Iterasi dimulai dari 1 hingga max_iter
-        double f_x0 = f(x0, pilihan);// Hitung nilai fungsi di x0
-        double f_x1 = f(x1, pilihan);// Hitung nilai fungsi di x1
+// metode secant
+void secant(string func, double x0, double x1, double tol, int max_iter) {
+    double x2;
 
-        if(f_x1 - f_x0 == 0) {
+    for (int i = 1; i <= max_iter; i++) {
+        double f_x0 = evaluate(func, x0);
+        double f_x1 = evaluate(func, x1);
+
+        if (f_x1 - f_x0 == 0) {
             cout << "Error: pembagian nol!\n";
             return;
         }
 
-        x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0); // Rumus metode secant untuk menghitung iterasi berikutnya
+        x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0);
 
-        cout << "Iterasi " << i << ": x = " << x2 << endl;// Output hasil iterasi saat ini
+        cout << "Iterasi " << i << ": x = " << x2 << endl;
 
-        if(abs(x2 - x1) < tol) {// Cek apakah hasil iterasi sudah cukup dekat dengan akar yang sebenarnya, jika ya, maka iterasi dihentikan
+        if (abs(x2 - x1) < tol) {
             cout << "\nAkar ditemukan: " << x2 << endl;
             return;
         }
 
-        x0 = x1;// Update x0 dengan nilai x1 untuk iterasi berikutnya
-        x1 = x2;// Update x1 dengan nilai x2 untuk iterasi berikutnya
+        x0 = x1;
+        x1 = x2;
     }
 
-    cout << "\nTidak konvergen dalam " << max_iter << " iterasi.\n";// Jika iterasi mencapai max_iter tanpa menemukan akar yang cukup dekat, maka output bahwa metode tidak konvergen
+    cout << "\nTidak konvergen.\n";
 }
 
 int main() {
-    int pilihan;
+    string func;
     double x0, x1, tol;
     int max_iter;
 
-    cout << "=== METODE SECANT ===\n";
-    cout << "Pilih fungsi:\n";
-    cout << "1. x^2 - 4\n";
-    cout << "2. x^3 - x - 2\n";
-    cout << "3. cos(x) - x\n";
-    cout << "4. e^x - 3x\n";
-    cout << "Pilihan: ";
-    cin >> pilihan;
+    cout << "=== METODE SECANT (FUNGSI BEBAS) ===\n";
+    cout << "Masukkan fungsi f(x): ";
+    getline(cin, func);
 
     cout << "Masukkan x0: ";
     cin >> x0;
@@ -70,7 +81,11 @@ int main() {
     cout << "Masukkan max iterasi: ";
     cin >> max_iter;
 
-    secant(pilihan, x0, x1, tol, max_iter);
+    try {
+        secant(func, x0, x1, tol, max_iter);
+    } catch (exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
 
     return 0;
 }
