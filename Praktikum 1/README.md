@@ -194,7 +194,7 @@ int main()
 ### A. Langkah-Langkah
 Pada praktikum ini, diminta untuk mengimplementasikan metode numerik Secant ke dalam sebuah program yang mampu menampilkan proses iterasi hingga menemukan akar persamaan.
 
-Langkah pertama adalah mendefinisikan fungsi f(x) yang akan dicari akarnya. Karena C++ tidak dapat langsung membaca fungsi dalam bentuk string, maka digunakan parser untuk mengubah string menjadi fungsi matematika.
+Langkah pertama adalah mendefinisikan fungsi $f(x)$ yang akan dicari akarnya. Karena `C++` tidak dapat langsung membaca fungsi dalam bentuk string, maka digunakan parser untuk mengubah string menjadi fungsi matematika.
 ```C++
 // evaluator fungsi dari string
 double evaluate(string func_str, double x) {
