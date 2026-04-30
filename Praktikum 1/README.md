@@ -194,17 +194,32 @@ int main()
 ### A. Langkah-Langkah
 Pada praktikum ini, diminta untuk mengimplementasikan metode numerik Secant ke dalam sebuah program yang mampu menampilkan proses iterasi hingga menemukan akar persamaan.
 
-Langkah pertama adalah mendefinisikan fungsi f(x) yang akan dicari akarnya. Dalam program ini, pengguna dapat memilih beberapa fungsi yang telah disediakan melalui menu.
+Langkah pertama adalah mendefinisikan fungsi f(x) yang akan dicari akarnya. Karena C++ tidak dapat langsung membaca fungsi dalam bentuk string, maka digunakan parser untuk mengubah string menjadi fungsi matematika.
 ```C++
-// Fungsi yang bisa dipilih user
-double f(double x, int pilihan) {
-    switch(pilihan) {
-        case 1: return x*x - 4;              // x^2 - 4
-        case 2: return x*x*x - x - 2;        // x^3 - x - 2
-        case 3: return cos(x) - x;           // cos(x) - x
-        case 4: return exp(x) - 3*x;         // e^x - 3x
-        default: return 0;
+// evaluator fungsi dari string
+double evaluate(string func_str, double x) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+
+    double var_x = x;// variabel x yang akan digunakan dalam ekspresi
+
+    // buat symbol table dan daftarkan variabel serta fungsi yang diperlukan
+    symbol_table_t symbol_table;
+    symbol_table.add_variable("x", var_x);
+    symbol_table.add_constants();
+
+    // buat ekspresi dan daftarkan symbol table
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    // buat parser dan kompilasi ekspresi dari string
+    parser_t parser;
+    if (!parser.compile(func_str, expression)) {
+        throw runtime_error("Fungsi tidak valid!");
     }
+
+    return expression.value();// evaluasi ekspresi dengan nilai x yang diberikan
 }
 ```
 
@@ -257,25 +272,20 @@ Mekanisme dalam metode Secant berjalan dengan langkah sebagai berikut:
 
 Lalu pada fungsi `main`, program menerima input dari pengguna berupa:
 
-1. Pilihan fungsi
+1. Fungsi $f(x)$
 2. Nilai awal $x_0$ dan $x_1$
 3. Nilai toleransi
 4. Maksimum iterasi
     
 ```C++
 int main() {
-    int pilihan;
+    string func;
     double x0, x1, tol;
     int max_iter;
 
     cout << "=== METODE SECANT ===\n";
-    cout << "Pilih fungsi:\n";
-    cout << "1. x^2 - 4\n";
-    cout << "2. x^3 - x - 2\n";
-    cout << "3. cos(x) - x\n";
-    cout << "4. e^x - 3x\n";
-    cout << "Pilihan: ";
-    cin >> pilihan;
+    cout << "Masukkan fungsi f(x): ";
+    getline(cin, func);
 
     cout << "Masukkan x0: ";
     cin >> x0;
@@ -289,7 +299,11 @@ int main() {
     cout << "Masukkan max iterasi: ";
     cin >> max_iter;
 
-    secant(pilihan, x0, x1, tol, max_iter);
+    try {// panggil metode secant dengan fungsi yang diberikan
+        secant(func, x0, x1, tol, max_iter);
+    } catch (exception& e) {// tangani error jika fungsi tidak valid atau terjadi pembagian nol
+        cout << "Error: " << e.what() << endl;
+    }
 
     return 0;
 }
@@ -297,77 +311,87 @@ int main() {
 
 ### B. Screenshot
 
-<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/98ef610a-7b39-4ffb-bcc8-31cf3d9d08c2" />
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/f47f8816-56ad-46ab-b9ba-631477131ae3" />
 &nbsp;
-<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/13626a98-23f6-48ca-842d-f9c72a57bca8" />
+<img width="739" height="373" alt="image" src="https://github.com/user-attachments/assets/f42a591a-c10d-4e1a-9d32-ac2a765853cf" />
 &nbsp;
-<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/4345b974-ba0a-49c8-9470-5ce5915880e3" />
+<img width="737" height="324" alt="image" src="https://github.com/user-attachments/assets/31e847ce-0e26-49b3-a1dc-923e14692dd3" />
 &nbsp;
-<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/40326199-4549-4c9a-b6a0-4a17ed1649f1" />
-
+<img width="736" height="325" alt="image" src="https://github.com/user-attachments/assets/8361113b-ecad-458e-87a2-1b40f40646a9" />
 
 ### C. Full Code
 
 ```C++
 #include <iostream>
 #include <cmath>
-#include <iomanip>
+#include <string>
+#include "exprtk.hpp" // open source library untuk parsing dan evaluasi ekspresi matematika
+
 using namespace std;
 
-// Fungsi yang bisa dipilih user
-double f(double x, int pilihan) {
-    switch(pilihan) {
-        case 1: return x*x - 4;              // x^2 - 4
-        case 2: return x*x*x - x - 2;        // x^3 - x - 2
-        case 3: return cos(x) - x;           // cos(x) - x
-        case 4: return exp(x) - 3*x;         // e^x - 3x
-        default: return 0;
+// evaluator fungsi dari string
+double evaluate(string func_str, double x) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+
+    double var_x = x;// variabel x yang akan digunakan dalam ekspresi
+
+    // buat symbol table dan daftarkan variabel serta fungsi yang diperlukan
+    symbol_table_t symbol_table;
+    symbol_table.add_variable("x", var_x);
+    symbol_table.add_constants();
+
+    // buat ekspresi dan daftarkan symbol table
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    // buat parser dan kompilasi ekspresi dari string
+    parser_t parser;
+    if (!parser.compile(func_str, expression)) {
+        throw runtime_error("Fungsi tidak valid!");
     }
+
+    return expression.value();// evaluasi ekspresi dengan nilai x yang diberikan
 }
 
-void secant(int pilihan, double x0, double x1, double tol, int max_iter) {
-    double x2;// Variabel untuk menyimpan hasil iterasi berikutnya
-    
-    cout << fixed << setprecision(6);// Set precision untuk output, agar lebih mudah dibaca, terutama untuk nilai akar yang ditemukan
-    
-    for(int i = 1; i <= max_iter; i++) {// Iterasi dimulai dari 1 hingga max_iter
-        double f_x0 = f(x0, pilihan);// Hitung nilai fungsi di x0
-        double f_x1 = f(x1, pilihan);// Hitung nilai fungsi di x1
+// metode secant
+void secant(string func, double x0, double x1, double tol, int max_iter) {
+    double x2;
 
-        if(f_x1 - f_x0 == 0) {
+    for (int i = 1; i <= max_iter; i++) {
+        double f_x0 = evaluate(func, x0);
+        double f_x1 = evaluate(func, x1);
+
+        if (f_x1 - f_x0 == 0) {
             cout << "Error: pembagian nol!\n";
             return;
         }
 
-        x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0); // Rumus metode secant untuk menghitung iterasi berikutnya
+        x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0);
 
-        cout << "Iterasi " << i << ": x = " << x2 << endl;// Output hasil iterasi saat ini
+        cout << "Iterasi " << i << ": x = " << x2 << endl;
 
-        if(abs(x2 - x1) < tol) {// Cek apakah hasil iterasi sudah cukup dekat dengan akar yang sebenarnya, jika ya, maka iterasi dihentikan
+        if (abs(x2 - x1) < tol) {
             cout << "\nAkar ditemukan: " << x2 << endl;
             return;
         }
 
-        x0 = x1;// Update x0 dengan nilai x1 untuk iterasi berikutnya
-        x1 = x2;// Update x1 dengan nilai x2 untuk iterasi berikutnya
+        x0 = x1;
+        x1 = x2;
     }
 
-    cout << "\nTidak konvergen dalam " << max_iter << " iterasi.\n";// Jika iterasi mencapai max_iter tanpa menemukan akar yang cukup dekat, maka output bahwa metode tidak konvergen
+    cout << "\nTidak konvergen.\n";
 }
 
 int main() {
-    int pilihan;
+    string func;
     double x0, x1, tol;
     int max_iter;
 
     cout << "=== METODE SECANT ===\n";
-    cout << "Pilih fungsi:\n";
-    cout << "1. x^2 - 4\n";
-    cout << "2. x^3 - x - 2\n";
-    cout << "3. cos(x) - x\n";
-    cout << "4. e^x - 3x\n";
-    cout << "Pilihan: ";
-    cin >> pilihan;
+    cout << "Masukkan fungsi f(x): ";
+    getline(cin, func);
 
     cout << "Masukkan x0: ";
     cin >> x0;
@@ -381,7 +405,11 @@ int main() {
     cout << "Masukkan max iterasi: ";
     cin >> max_iter;
 
-    secant(pilihan, x0, x1, tol, max_iter);
+    try {// panggil metode secant dengan fungsi yang diberikan
+        secant(func, x0, x1, tol, max_iter);
+    } catch (exception& e) {// tangani error jika fungsi tidak valid atau terjadi pembagian nol
+        cout << "Error: " << e.what() << endl;
+    }
 
     return 0;
 }
