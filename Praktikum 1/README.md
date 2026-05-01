@@ -15,7 +15,7 @@ double func(double x) {
 }
 ```
 
-Selanjutnya, buat fungsi `regulaFalsi` menggunakan rumus iteratif $x_2 = x_1 - (f(x_2)-(x_2-x_1))/(f(x_2)-f(x_1))$ . Fungsi ini berjalan berkali-kali selama $x_2$ masih memenuhi syarat toleransi.
+Selanjutnya, buat fungsi `regulaFalsi` menggunakan rumus iteratif $x_2 = x_1 - (f(x_2)*(x_2-x_1))/(f(x_2)-f(x_1))$ . Fungsi ini berjalan berkali-kali selama $x_2$ masih memenuhi syarat toleransi.
 ```C++
 double regulaFalsi(double x0, double x1, int digits) 
 {
