@@ -225,7 +225,7 @@ double evaluate(string func_str, double x) {
 
 Selanjutnya, Metode Secant menggunakan dua tebakan awal $x_0$ dan $x_1$, lalu menghitung nilai pendekatan berikutnya menggunakan rumus:
 
-$x_{n+1} = x_n - f(x_n) \frac{f(x_n)x_{n-1} - x_n}{f(x_n)-f(x_{n-1})}$
+$x_{n+1} = x_n - f(x_n) \frac{f(x_n)(x_{n-1} - x_n)}{f(x_n)-f(x_{n-1})}$
 
 ```C++
 void secant(int pilihan, double x0, double x1, double tol, int max_iter) {
