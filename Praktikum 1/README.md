@@ -5,7 +5,7 @@
 ### A. Langkah-Langkah
 Pada praktikum ini, diminta untuk membuat suatu mengimplementasikan metode Regula Falsi menjadi suatu program yang dapat menampilkan proses iteratif numerik secara lengkap bersama dengan grafik fungsinya.
 
-Kami memutuskan untuk menggunakan bahasa pemrograman `C++` dengan bantuan `gnuplot` untuk output grafiknya.
+Kami memutuskan untuk menggunakan bahasa pemrograman `C++` dengan adanya bantuan `gnuplot` untuk output grafiknya.
 
 Pertama-tama, inisialisasi fungsi sesuai kebutuhan. Sebagai contoh, disini kami menggunakan fungsi $f(x) = e^{-x} - x$ yang terdapat di contoh soal PPT.
 ```C++
