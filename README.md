@@ -12,3 +12,4 @@
 
 ### Daftar Praktikum
 - [Praktikum 1 - PPT2](/Praktikum%201/)
+- [Praktikum 2 - PPT6](/Praktikum/%203/)
