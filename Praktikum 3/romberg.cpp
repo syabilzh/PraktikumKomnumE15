@@ -1,15 +1,11 @@
 /*
  * ============================================================
  *   INTEGRASI ROMBERG
- *   Metode Numerik - Tugas Praktikum #3
+ *   Metode Numerik - Tugas Praktikum #2
  * ============================================================
- *
  * Cara mengubah fungsi:
  *   Edit bagian "FUNGSI YANG DIINTEGRASIKAN" di bawah,
  *   lalu compile ulang.
- *
- * Compile  : g++ -o romberg romberg.cpp -lm
- * Jalankan : ./romberg
  * ============================================================
  */
 
@@ -33,7 +29,6 @@ using namespace std;
 double f(double x) {
     return exp(x);
 }
-
 const string NAMA_FUNGSI = "f(x) = e^x";
 
 /* ============================================================
@@ -63,10 +58,7 @@ double trapezoidal(double a, double b, int n) {
 
 // ============================================================
 //   ROMBERG INTEGRATION
-//   Menggunakan tabel Richardson Extrapolation
 // ============================================================
-// R[i][j] = estimasi integral pada level i, orde 2(j+1)
-// R[i][0] = Trapezoidal dengan 2^i sub-interval
 // R[i][j] = (4^j * R[i][j-1] - R[i-1][j-1]) / (4^j - 1)
 
 vector<vector<double>> romberg(double a, double b, int maxLevel, double tol) {
